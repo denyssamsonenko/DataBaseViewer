@@ -139,12 +139,14 @@
             this.AmountCheckBox.AutoSize = true;
             this.AmountCheckBox.Checked = true;
             this.AmountCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AmountCheckBox.Enabled = false;
             this.AmountCheckBox.Location = new System.Drawing.Point(556, 53);
             this.AmountCheckBox.Name = "AmountCheckBox";
             this.AmountCheckBox.Size = new System.Drawing.Size(85, 17);
             this.AmountCheckBox.TabIndex = 3;
             this.AmountCheckBox.Text = "Количество";
             this.AmountCheckBox.UseVisualStyleBackColor = true;
+            this.AmountCheckBox.Visible = false;
             this.AmountCheckBox.CheckedChanged += new System.EventHandler(this.AmountCheckBox_CheckedChanged);
             // 
             // TotalCheckBox
@@ -152,12 +154,14 @@
             this.TotalCheckBox.AutoSize = true;
             this.TotalCheckBox.Checked = true;
             this.TotalCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.TotalCheckBox.Enabled = false;
             this.TotalCheckBox.Location = new System.Drawing.Point(665, 53);
             this.TotalCheckBox.Name = "TotalCheckBox";
             this.TotalCheckBox.Size = new System.Drawing.Size(60, 17);
             this.TotalCheckBox.TabIndex = 3;
             this.TotalCheckBox.Text = "Сумма";
             this.TotalCheckBox.UseVisualStyleBackColor = true;
+            this.TotalCheckBox.Visible = false;
             this.TotalCheckBox.CheckedChanged += new System.EventHandler(this.TotalCheckBox_CheckedChanged);
             // 
             // BackButton

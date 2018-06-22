@@ -19,9 +19,12 @@ namespace IT_Enterprise_Test
         private string manager;
         private string amount;
         private string total;
+        private bool sortSelect;
         #endregion
 
         public List<string> parameters = new List<string>();
+        private List<string> reverseParameters = new List<string>();
+
         public List<string> GetParameters()
         {
             parameters.Clear();
@@ -53,12 +56,21 @@ namespace IT_Enterprise_Test
             {
                 parameters.Add(total);
             }
-
             return parameters;
         }
 
+        public List<string> GetReverseParameters()
+        {
+            reverseParameters.Clear();
+            for (int i = parameters.Count - 1; i >= 0; i-- )
+            {
+                reverseParameters.Add(parameters[i]);
+            }
+            return reverseParameters;
+        }
+
         public ViewSelector(string date, string organization, string city, string country,
-            string manager, string amount, string total)
+            string manager, string amount, string total, bool sortSelect)
         {
             this.date = date;
             this.organization = organization;
@@ -67,6 +79,7 @@ namespace IT_Enterprise_Test
             this.manager = manager;
             this.amount = amount;
             this.total = total;
+            this.sortSelect = sortSelect;
         }
 
         #region pubic VaraiblesProperties
@@ -105,6 +118,11 @@ namespace IT_Enterprise_Test
         {
             get { return total; }
             set { total = value; }
+        }
+        public bool SortSelect
+        {
+            get { return sortSelect; }
+            set { sortSelect = value; }
         }
     }
     #endregion

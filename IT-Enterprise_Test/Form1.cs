@@ -13,20 +13,21 @@ namespace IT_Enterprise_Test
 {
     public partial class Shipment : Form
     {
-        ViewSelector viewSelector = new ViewSelector("", "", "", "", "", "", ""); 
+        ViewSelector viewSelector = new ViewSelector("", "", "", "", "", "", "", false); 
         public Shipment()
         {
             InitializeComponent();
             LoadDataBase();
+            UpdateButton.Enabled = false;
         }
         
         private void LoadDataBase()
         {
-            viewSelector = new ViewSelector("Date", "Organization", "City", "Country", "Manager", "Amount", "Total");
+            viewSelector = new ViewSelector("Date", "Organization", "City", "Country", "Manager", "Amount", "Total", false);
             DataViewer dataViewer = new DataViewer();
             ShipmentDataGridView.DataSource = dataViewer.ShowData(viewSelector);
             HideIdAndRenameColumns(viewSelector);
-            viewSelector = new ViewSelector("", "", "", "", "", "", "");
+            viewSelector = new ViewSelector("", "", "", "", "", "", "", false);
         }
 
         private void LoadDataBase(ViewSelector viewSelector)
@@ -47,14 +48,23 @@ namespace IT_Enterprise_Test
         #region Buttons
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            AmountCheckBox_CheckedChanged(sender, e);
-            TotalCheckBox_CheckedChanged(sender, e);
-            LoadDataBase(viewSelector);
+            if (!String.IsNullOrEmpty(viewSelector.Date) || !String.IsNullOrEmpty(viewSelector.Organization) ||
+                !String.IsNullOrEmpty(viewSelector.City) || !String.IsNullOrEmpty(viewSelector.Country) ||
+                !String.IsNullOrEmpty(viewSelector.Manager))
+            {
+                viewSelector.SortSelect = true;
+                LoadDataBase(viewSelector);
+                viewSelector.SortSelect = false;
+            }
+            else
+            {
+                UpdateButton.Enabled = false;
+            }
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            LoadDataBase();
+            LoadDataBase(new ViewSelector("Date", "Organization", "City", "Country", "Manager", "Amount", "Total", false));
         }
         #endregion
 
@@ -65,6 +75,7 @@ namespace IT_Enterprise_Test
             if(DateCheckBox.Checked)
             {
                 viewSelector.Date = "Date";
+                UpdateButton.Enabled = true;
             }
             else if(DateCheckBox.Checked == false)
             {
@@ -77,6 +88,7 @@ namespace IT_Enterprise_Test
             if (OrganizationCheckBox.Checked)
             {
                 viewSelector.Organization = "Organization";
+                UpdateButton.Enabled = true;
             }
             else if (OrganizationCheckBox.Checked == false)
             {
@@ -89,6 +101,7 @@ namespace IT_Enterprise_Test
             if (CityCheckBox.Checked)
             {
                 viewSelector.City = "City";
+                UpdateButton.Enabled = true;
             }
             else if (CityCheckBox.Checked == false)
             {
@@ -101,6 +114,7 @@ namespace IT_Enterprise_Test
             if (CountryCheckBox.Checked)
             {
                 viewSelector.Country = "Country";
+                UpdateButton.Enabled = true;
             }
             else if (CountryCheckBox.Checked == false)
             {
@@ -113,6 +127,7 @@ namespace IT_Enterprise_Test
             if (ManagerCheckBox.Checked)
             {
                 viewSelector.Manager = "Manager";
+                UpdateButton.Enabled = true;
             }
             else if (ManagerCheckBox.Checked == false)
             {
@@ -124,7 +139,7 @@ namespace IT_Enterprise_Test
         {
             if (AmountCheckBox.Checked)
             {
-                viewSelector.Amount = "Amount";
+                //viewSelector.Amount = "Amount";
             }
             else if (AmountCheckBox.Checked == false)
             {
@@ -136,7 +151,7 @@ namespace IT_Enterprise_Test
         {
             if (TotalCheckBox.Checked)
             {
-                viewSelector.Total = "Total";
+                //viewSelector.Total = "Total";
             }
             else if (TotalCheckBox.Checked == false)
             {
@@ -151,41 +166,41 @@ namespace IT_Enterprise_Test
             {
                 ShipmentDataGridView.Columns[i].Visible = false;
             }
-            if (viewSelector.Date != "")
-            {
-                ShipmentDataGridView.Columns[1].HeaderText = "Дата";
-                ShipmentDataGridView.Columns[1].Visible = true;
-            }
-            if (viewSelector.Organization != "")
-            {
-                ShipmentDataGridView.Columns[2].HeaderText = "Организация";
-                ShipmentDataGridView.Columns[2].Visible = true;
-            }
-            if (viewSelector.City != "")
-            {
-                ShipmentDataGridView.Columns[3].HeaderText = "Город";
-                ShipmentDataGridView.Columns[3].Visible = true;
-            }
-            if (viewSelector.Country != "")
-            {
-                ShipmentDataGridView.Columns[4].HeaderText = "Страна";
-                ShipmentDataGridView.Columns[4].Visible = true;
-            }
-            if (viewSelector.Manager != "")
-            {
-                ShipmentDataGridView.Columns[5].HeaderText = "Менеджер";
-                ShipmentDataGridView.Columns[5].Visible = true;
-            }
-            if (viewSelector.Amount != "")
-            {
-                ShipmentDataGridView.Columns[6].HeaderText = "Количство";
-                ShipmentDataGridView.Columns[6].Visible = true;
-            }
-            if (viewSelector.Total != "")
-            {
-                ShipmentDataGridView.Columns[7].HeaderText = "Сумма";
-                ShipmentDataGridView.Columns[7].Visible = true;
-            }
+                if (viewSelector.Date != "")
+                {
+                    ShipmentDataGridView.Columns[0].HeaderText = "Дата";
+                    ShipmentDataGridView.Columns[0].Visible = true;
+                    //viewSelector.Date = "";
+                }
+                if (viewSelector.Organization != "")
+                {
+                    ShipmentDataGridView.Columns[1].HeaderText = "Организация";
+                    ShipmentDataGridView.Columns[1].Visible = true;
+                    //viewSelector.Organization = "";
+                }
+                if (viewSelector.City != "")
+                {
+                    ShipmentDataGridView.Columns[2].HeaderText = "Город";
+                    ShipmentDataGridView.Columns[2].Visible = true;
+                    //viewSelector.City = "";
+                }
+                if (viewSelector.Country != "")
+                {
+                    ShipmentDataGridView.Columns[3].HeaderText = "Страна";
+                    ShipmentDataGridView.Columns[3].Visible = true;
+                    //viewSelector.Country = "";
+                }
+                if (viewSelector.Manager != "")
+                {
+                    ShipmentDataGridView.Columns[4].HeaderText = "Менеджер";
+                    ShipmentDataGridView.Columns[4].Visible = true;
+                    //viewSelector.Manager = "";
+                }
+            ShipmentDataGridView.Columns[ShipmentDataGridView.Columns.Count-2].HeaderText = "Количство";
+            ShipmentDataGridView.Columns[ShipmentDataGridView.Columns.Count - 2].Visible = true;
+
+            ShipmentDataGridView.Columns[ShipmentDataGridView.Columns.Count - 1].HeaderText = "Сумма";
+            ShipmentDataGridView.Columns[ShipmentDataGridView.Columns.Count - 1].Visible = true;
         }
 
     }

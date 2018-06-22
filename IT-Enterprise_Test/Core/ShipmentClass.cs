@@ -11,7 +11,6 @@ namespace IT_Enterprise_Test
 
         #region private Variables
 
-        private Guid id;
         private DateTime date;
         private string organization;
         private string city;
@@ -27,10 +26,9 @@ namespace IT_Enterprise_Test
 
         }
 
-        public ShipmentClass(Guid id, DateTime date, string organization, string city, string country,
+        public ShipmentClass( DateTime date, string organization, string city, string country,
             string manager, int amount, decimal total)
         {
-            this.id = id;
             this.date = date;
             this.organization = organization;
             this.city = city;
@@ -42,11 +40,6 @@ namespace IT_Enterprise_Test
 
         #region pubic VaraiblesProperties
 
-        public Guid Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
         public DateTime Date
         {
             get { return date; }

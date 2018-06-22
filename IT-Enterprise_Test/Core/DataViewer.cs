@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace IT_Enterprise_Test
 {
@@ -28,15 +29,23 @@ namespace IT_Enterprise_Test
             myConnection.Open();
 
             var result = String.Join(", ", selectedParams.GetParameters());
-            if(result != "")
+            var postfixResult = String.Join(", ", selectedParams.GetReverseParameters());
+
+            if (result != "" && !selectedParams.SortSelect)
             {
-                query = "SELECT Id, " + result + " FROM Shipment";
+                query = "SELECT " + result + " FROM Shipment";
+            }
+            else if (selectedParams.SortSelect)
+            {
+                query = "SELECT " + result + ", SUM (Amount), SUM(Total) FROM Shipment GROUP BY " + postfixResult;
             }
             else
             {
-                query = "SELECT * FROM Shipment";
+                MessageBox.Show("Error with Query");
             }
             finalQuery = query.ToString();
+            //finalQuery = "SELECT Date, Organization, SUM (Amount), SUM (Total) FROM Shipment GROUP BY Organization, Date";
+            //selectedParams.SortSelect = true;
 
             SqlCommand command = new SqlCommand(finalQuery, myConnection);
 
@@ -45,7 +54,10 @@ namespace IT_Enterprise_Test
             while (Reader.Read())
             {
                 ShipmentClass shipmentClass = new ShipmentClass();
-                shipmentClass.Id = (Guid)Reader["Id"];
+                //if (!selectedParams.SortSelect)
+                //{
+                //    shipmentClass.Id = (Guid)Reader["Id"];
+                //}
                 if (selectedParams.Date !="")
                 {
                     shipmentClass.Date = (DateTime)Reader["Date"];
@@ -65,16 +77,23 @@ namespace IT_Enterprise_Test
                 if (selectedParams.Manager != "")
                 {
                     shipmentClass.Manager = Reader["Manager"].ToString();
-                }
+                }              
                 if (selectedParams.Amount != "")
                 {
                     shipmentClass.Amount = (int)Reader["Amount"];
+                }
+                else
+                {
+                    shipmentClass.Amount = (int)Reader[selectedParams.GetParameters().Count];
                 }
                 if (selectedParams.Total != "")
                 {
                     shipmentClass.Total = (decimal)Reader["Total"];
                 }
-
+                else
+                {
+                    shipmentClass.Total = (decimal)Reader[selectedParams.GetParameters().Count + 1];
+                }
                 Transactions.Add(shipmentClass);
             }
             Reader.Close();
