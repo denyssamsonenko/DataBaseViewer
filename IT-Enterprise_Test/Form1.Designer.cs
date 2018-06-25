@@ -29,33 +29,30 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.UpdateButton = new System.Windows.Forms.Button();
+            this.SelectButton = new System.Windows.Forms.Button();
             this.ShipmentDataGridView = new System.Windows.Forms.DataGridView();
             this.shipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iTEnterpriseStorageDataSet = new IT_Enterprise_Test.ITEnterpriseStorageDataSet();
-            this.shipmentTableAdapter = new IT_Enterprise_Test.ITEnterpriseStorageDataSetTableAdapters.ShipmentTableAdapter();
             this.DateCheckBox = new System.Windows.Forms.CheckBox();
             this.OrganizationCheckBox = new System.Windows.Forms.CheckBox();
             this.CityCheckBox = new System.Windows.Forms.CheckBox();
             this.CountryCheckBox = new System.Windows.Forms.CheckBox();
             this.ManagerCheckBox = new System.Windows.Forms.CheckBox();
-            this.AmountCheckBox = new System.Windows.Forms.CheckBox();
-            this.TotalCheckBox = new System.Windows.Forms.CheckBox();
             this.BackButton = new System.Windows.Forms.Button();
+            this.TotalCheckBox = new System.Windows.Forms.CheckBox();
+            this.AmountCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ShipmentDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shipmentBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iTEnterpriseStorageDataSet)).BeginInit();
             this.SuspendLayout();
             // 
-            // UpdateButton
+            // SelectButton
             // 
-            this.UpdateButton.Location = new System.Drawing.Point(92, 12);
-            this.UpdateButton.Name = "UpdateButton";
-            this.UpdateButton.Size = new System.Drawing.Size(91, 23);
-            this.UpdateButton.TabIndex = 0;
-            this.UpdateButton.Text = "Сортировать";
-            this.UpdateButton.UseVisualStyleBackColor = true;
-            this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
+            this.SelectButton.Location = new System.Drawing.Point(92, 12);
+            this.SelectButton.Name = "SelectButton";
+            this.SelectButton.Size = new System.Drawing.Size(91, 23);
+            this.SelectButton.TabIndex = 0;
+            this.SelectButton.Text = "Сортировать";
+            this.SelectButton.UseVisualStyleBackColor = true;
+            this.SelectButton.Click += new System.EventHandler(this.SelectButton_Click);
             // 
             // ShipmentDataGridView
             // 
@@ -64,20 +61,6 @@
             this.ShipmentDataGridView.Name = "ShipmentDataGridView";
             this.ShipmentDataGridView.Size = new System.Drawing.Size(776, 264);
             this.ShipmentDataGridView.TabIndex = 2;
-            // 
-            // shipmentBindingSource
-            // 
-            this.shipmentBindingSource.DataMember = "Shipment";
-            this.shipmentBindingSource.DataSource = this.iTEnterpriseStorageDataSet;
-            // 
-            // iTEnterpriseStorageDataSet
-            // 
-            this.iTEnterpriseStorageDataSet.DataSetName = "ITEnterpriseStorageDataSet";
-            this.iTEnterpriseStorageDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // shipmentTableAdapter
-            // 
-            this.shipmentTableAdapter.ClearBeforeFill = true;
             // 
             // DateCheckBox
             // 
@@ -134,20 +117,15 @@
             this.ManagerCheckBox.UseVisualStyleBackColor = true;
             this.ManagerCheckBox.CheckedChanged += new System.EventHandler(this.ManagerCheckBox_CheckedChanged);
             // 
-            // AmountCheckBox
+            // BackButton
             // 
-            this.AmountCheckBox.AutoSize = true;
-            this.AmountCheckBox.Checked = true;
-            this.AmountCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AmountCheckBox.Enabled = false;
-            this.AmountCheckBox.Location = new System.Drawing.Point(556, 53);
-            this.AmountCheckBox.Name = "AmountCheckBox";
-            this.AmountCheckBox.Size = new System.Drawing.Size(85, 17);
-            this.AmountCheckBox.TabIndex = 3;
-            this.AmountCheckBox.Text = "Количество";
-            this.AmountCheckBox.UseVisualStyleBackColor = true;
-            this.AmountCheckBox.Visible = false;
-            this.AmountCheckBox.CheckedChanged += new System.EventHandler(this.AmountCheckBox_CheckedChanged);
+            this.BackButton.Location = new System.Drawing.Point(2, 12);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(75, 23);
+            this.BackButton.TabIndex = 4;
+            this.BackButton.Text = "Назад";
+            this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // TotalCheckBox
             // 
@@ -161,18 +139,21 @@
             this.TotalCheckBox.TabIndex = 3;
             this.TotalCheckBox.Text = "Сумма";
             this.TotalCheckBox.UseVisualStyleBackColor = true;
-            this.TotalCheckBox.Visible = false;
             this.TotalCheckBox.CheckedChanged += new System.EventHandler(this.TotalCheckBox_CheckedChanged);
             // 
-            // BackButton
+            // AmountCheckBox
             // 
-            this.BackButton.Location = new System.Drawing.Point(2, 12);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(75, 23);
-            this.BackButton.TabIndex = 4;
-            this.BackButton.Text = "Назад";
-            this.BackButton.UseVisualStyleBackColor = true;
-            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            this.AmountCheckBox.AutoSize = true;
+            this.AmountCheckBox.Checked = true;
+            this.AmountCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AmountCheckBox.Enabled = false;
+            this.AmountCheckBox.Location = new System.Drawing.Point(556, 53);
+            this.AmountCheckBox.Name = "AmountCheckBox";
+            this.AmountCheckBox.Size = new System.Drawing.Size(85, 17);
+            this.AmountCheckBox.TabIndex = 3;
+            this.AmountCheckBox.Text = "Количество";
+            this.AmountCheckBox.UseVisualStyleBackColor = true;
+            this.AmountCheckBox.CheckedChanged += new System.EventHandler(this.AmountCheckBox_CheckedChanged);
             // 
             // Shipment
             // 
@@ -188,13 +169,12 @@
             this.Controls.Add(this.OrganizationCheckBox);
             this.Controls.Add(this.DateCheckBox);
             this.Controls.Add(this.ShipmentDataGridView);
-            this.Controls.Add(this.UpdateButton);
+            this.Controls.Add(this.SelectButton);
             this.Name = "Shipment";
             this.Text = "Shipment";
             this.Load += new System.EventHandler(this.Shipment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ShipmentDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.shipmentBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iTEnterpriseStorageDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,19 +182,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Button UpdateButton;
+        private System.Windows.Forms.Button SelectButton;
         private System.Windows.Forms.DataGridView ShipmentDataGridView;
-        private ITEnterpriseStorageDataSet iTEnterpriseStorageDataSet;
         private System.Windows.Forms.BindingSource shipmentBindingSource;
-        private ITEnterpriseStorageDataSetTableAdapters.ShipmentTableAdapter shipmentTableAdapter;
         private System.Windows.Forms.CheckBox DateCheckBox;
         private System.Windows.Forms.CheckBox OrganizationCheckBox;
         private System.Windows.Forms.CheckBox CityCheckBox;
         private System.Windows.Forms.CheckBox CountryCheckBox;
         private System.Windows.Forms.CheckBox ManagerCheckBox;
-        private System.Windows.Forms.CheckBox AmountCheckBox;
-        private System.Windows.Forms.CheckBox TotalCheckBox;
         private System.Windows.Forms.Button BackButton;
+        private System.Windows.Forms.CheckBox TotalCheckBox;
+        private System.Windows.Forms.CheckBox AmountCheckBox;
     }
 }
 

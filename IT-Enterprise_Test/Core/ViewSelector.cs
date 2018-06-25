@@ -9,9 +9,8 @@ namespace IT_Enterprise_Test
 {
     public class ViewSelector
     {
-
+        // Переменные повторяются с Моделью ShipmentClass, но в селекторе они все имеют тип string и используются для построения запросов к БД
         #region private Variables
-
         private string date;
         private string organization;
         private string city;
@@ -22,15 +21,15 @@ namespace IT_Enterprise_Test
         private bool sortSelect;
         #endregion
 
-        public List<string> parameters = new List<string>();
-        private List<string> reverseParameters = new List<string>();
+        public List<string> parameters = new List<string>();         // Параметры (все выбраные пользователем столбцы) которые необходимы для построения SQL query ("SELECT " + result +...)
+        private List<string> reverseParameters = new List<string>();    // Параметры в обратном порядке (все выбраные пользователем столбцы) которые необходимы для построения SQL query (... + "GROUP BY " + postfixResult)
 
-        public List<string> GetParameters()
+        public List<string> GetParameters() // Метод возвращающий параметры
         {
-            parameters.Clear();
-            if(Date!="")
+            parameters.Clear();             // Каждый раз список параметров очищается и строится по-новой
+            if(Date!="")                    // Из Form1 выбраных пользователем CheckBox.Checked устанавливаем, например, viewSelector.Date = "Date";
             {
-                parameters.Add(date);
+                parameters.Add(date);   //Добавляем параметри
             }
             if(Organization!="")
             {
@@ -56,10 +55,10 @@ namespace IT_Enterprise_Test
             {
                 parameters.Add(total);
             }
-            return parameters;
+            return parameters; // Возвращаем List
         }
 
-        public List<string> GetReverseParameters()
+        public List<string> GetReverseParameters() // List parameters в обратном порядке для GROUP BY в SQL Query
         {
             reverseParameters.Clear();
             for (int i = parameters.Count - 1; i >= 0; i-- )
@@ -69,7 +68,7 @@ namespace IT_Enterprise_Test
             return reverseParameters;
         }
 
-        public ViewSelector(string date, string organization, string city, string country,
+        public ViewSelector(string date, string organization, string city, string country,      // Контроуктор ViewSelector 
             string manager, string amount, string total, bool sortSelect)
         {
             this.date = date;
@@ -82,8 +81,8 @@ namespace IT_Enterprise_Test
             this.sortSelect = sortSelect;
         }
 
+        //Публичные методы переменных класса
         #region pubic VaraiblesProperties
-
         public string Date
         {
             get { return date; }

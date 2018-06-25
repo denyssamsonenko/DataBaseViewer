@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace IT_Enterprise_Test
 {
-    public class ShipmentClass
+    public class ShipmentClass // Модель строки в таблице
     {
 
         #region private Variables
 
-        private DateTime date;
-        private string organization;
-        private string city;
-        private string country;
-        private string manager;
-        private int amount;
-        private decimal total;
+        internal DateTime date;       // 'Дата'
+        private string organization; // 'Организация'
+        private string city;         // 'Город'
+        private string country;      // 'Страна'
+        private string manager;      // 'Менеджер'
+        private int amount;          // 'Количество'
+        private decimal total;       // 'Сумма'
 
         #endregion
 
@@ -26,7 +26,7 @@ namespace IT_Enterprise_Test
 
         }
 
-        public ShipmentClass( DateTime date, string organization, string city, string country,
+        public ShipmentClass(DateTime date, string organization, string city, string country,
             string manager, int amount, decimal total)
         {
             this.date = date;
@@ -38,7 +38,8 @@ namespace IT_Enterprise_Test
             this.total = total;
         }
 
-        #region pubic VaraiblesProperties
+        //Публичные методы переменных класса
+        #region pubic VaraiblesProperties 
 
         public DateTime Date
         {
